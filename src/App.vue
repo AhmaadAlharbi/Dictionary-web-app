@@ -64,9 +64,20 @@ export default {
       }
     };
     const audioSrc = computed(() => {
-      const sound = dictionaryWord.value?.phonetics.find((s) => s.audio);
-      return sound?.audio;
+      // Find the first phonetic object in the phonetics array that has an audio property
+      const sound = dictionaryWord.value
+        ? dictionaryWord.value.phonetics.find((s) => s.audio)
+        : undefined;
+
+      // If such a phonetic object is found, return its audio property
+      if (sound) {
+        return sound.audio;
+      } else {
+        // Otherwise, return undefined
+        return undefined;
+      }
     });
+
     const playSound = (wordSound) => {
       const audio = new Audio(wordSound);
       audio.play();
