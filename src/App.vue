@@ -21,14 +21,12 @@
         </div> -->
       </div>
       <div class="cursor-pointer">
-        <div v-for="(sound, index) in dictionaryWord.phonetics" :key="index">
-          <img
-            v-if="sound.audio"
-            src="./assets/images/icon-play.svg"
-            @click="playSound(sound.audio)"
-            alt=""
-          />
-        </div>
+        <img
+          v-if="audioSrc"
+          src="./assets/images/icon-play.svg"
+          @click="playSound(audioSrc)"
+          alt=""
+        />
       </div>
     </div>
     <div class="mt-10" v-if="dictionaryWord">
@@ -41,7 +39,7 @@
 import Navbar from "./components/Navbar.vue";
 import Search from "./components/Search.vue";
 import Details from "./components/Details.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export default {
   components: { Navbar, Search, Details },
   setup() {
@@ -65,11 +63,16 @@ export default {
           break;
       }
     };
+    const audioSrc = computed(() => {
+      const sound = dictionaryWord.value?.phonetics.find((s) => s.audio);
+      return sound?.audio;
+    });
     const playSound = (wordSound) => {
       const audio = new Audio(wordSound);
       audio.play();
     };
     return {
+      audioSrc,
       handleWord,
       dictionaryWord,
       phonetic,
