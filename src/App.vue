@@ -1,6 +1,9 @@
 <template>
-  <div class="container mx-auto flex flex-col max-w-2xl">
-    <Navbar />
+  <div
+    class="container mx-auto flex flex-col max-w-3xl"
+    :class="`font-${dynamicFont}`"
+  >
+    <Navbar @font="setFont" />
     <Search @word="handleWord" />
     <!-- Word -->
     <div class="mt-14 flex justify-between items-center" v-if="dictionaryWord">
@@ -36,12 +39,29 @@ export default {
   components: { Navbar, Search, Details },
   setup() {
     const dictionaryWord = ref(null);
+    const dynamicFont = ref("fontInter");
     const phonetic = ref("");
     const handleWord = async (data) => {
       console.log(data[0]);
       dictionaryWord.value = data[0];
     };
-    return { handleWord, dictionaryWord, phonetic };
+    const setFont = (font) => {
+      switch (font) {
+        case "san-serif":
+          dynamicFont.value = "fontInter";
+          alert(dynamicFont.value);
+          break;
+        case "serif":
+          dynamicFont.value = "fontLora";
+          alert(dynamicFont.value);
+          break;
+        case "Mono":
+          dynamicFont.value = "fontInconsolata";
+          alert(dynamicFont.value);
+          break;
+      }
+    };
+    return { handleWord, dictionaryWord, phonetic, setFont, dynamicFont };
   },
 };
 </script>

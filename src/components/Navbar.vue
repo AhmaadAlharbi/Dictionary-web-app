@@ -1,12 +1,41 @@
 <template>
-  <nav class="flex justify-evenly items-center mt-8">
+  <nav class="flex justify-between items-center mt-8">
     <!-- icon search -->
     <div>
       <img src="../assets/images/logo.svg" alt="" />
     </div>
-    <div class="flex items-center space-x-16">
+    <div class="relative flex items-center justify-center space-x-16">
       <div>
-        <p>Serif</p>
+        <p @click="showFonts">
+          Serif<i
+            class="fa fa-angle-down cursor-pointer"
+            style="font-size: 22px; margin-left: 10px; color: purple"
+          ></i>
+        </p>
+        <div
+          class="bg-white flex flex-col shadow-xl absolute top-0 right-10 m-10 w-full space-y-4 py-4"
+          v-if="fonts"
+          @click="showFonts"
+        >
+          <p
+            class="hover:text-purple-900 cursor-pointer ml-4"
+            @click="selectFonts('san-serif')"
+          >
+            San serif
+          </p>
+          <p
+            class="hover:text-purple-900 cursor-pointer ml-4"
+            @click="selectFonts('serif')"
+          >
+            Serif
+          </p>
+          <p
+            class="hover:text-purple-900 cursor-pointer ml-4"
+            @click="selectFonts('Mono')"
+          >
+            Mono
+          </p>
+        </div>
       </div>
       <!-- toggle switch -->
       <div>
@@ -24,7 +53,19 @@
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+export default {
+  setup(props, context) {
+    const fonts = ref(false);
+    const showFonts = () => {
+      fonts.value = !fonts.value;
+    };
+    const selectFonts = (font) => {
+      context.emit("font", font);
+    };
+    return { fonts, showFonts, selectFonts };
+  },
+};
 </script>
 
 <style scoped>
@@ -49,7 +90,7 @@ export default {};
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #a8288a;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="mt-10 space-y-4"
+    class="mt-10 space-y-4 mx-auto"
     v-for="(meaning, index) in dictionaryWord.meanings"
     :key="index"
   >
@@ -24,13 +24,13 @@
         synonyms <span class="text-purple-600"> {{ synonym }}</span>
       </p>
     </ul>
-    <p class="text-gray-400">
-      Source
-      <a :href="dictionaryWord.sourceUrls[0]" class="ml-4">{{
-        dictionaryWord.sourceUrls[0]
-      }}</a>
-    </p>
   </ul>
+  <p class="text-gray-400">
+    Source
+    <a :href="dictionaryWord.sourceUrls[0]" class="ml-4">{{
+      dictionaryWord.sourceUrls[0]
+    }}</a>
+  </p>
 </template>
 
 <script>
