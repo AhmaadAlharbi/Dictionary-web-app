@@ -7,7 +7,8 @@
     <div class="relative flex items-center justify-center space-x-16">
       <div>
         <p @click="showFonts">
-          Serif<i
+          {{ selectedFont }}
+          <i
             class="fa fa-angle-down cursor-pointer"
             style="font-size: 22px; margin-left: 10px; color: purple"
           ></i>
@@ -19,13 +20,13 @@
         >
           <p
             class="hover:text-purple-900 cursor-pointer ml-4"
-            @click="selectFonts('san-serif')"
+            @click="selectFonts('San Serif')"
           >
             San serif
           </p>
           <p
             class="hover:text-purple-900 cursor-pointer ml-4"
-            @click="selectFonts('serif')"
+            @click="selectFonts('Serif')"
           >
             Serif
           </p>
@@ -56,14 +57,16 @@
 import { ref } from "vue";
 export default {
   setup(props, context) {
+    const selectedFont = ref("Sans Serif");
     const fonts = ref(false);
     const showFonts = () => {
       fonts.value = !fonts.value;
     };
     const selectFonts = (font) => {
+      selectedFont.value = font;
       context.emit("font", font);
     };
-    return { fonts, showFonts, selectFonts };
+    return { fonts, showFonts, selectFonts, selectedFont };
   },
 };
 </script>

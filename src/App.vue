@@ -47,17 +47,14 @@ export default {
     };
     const setFont = (font) => {
       switch (font) {
-        case "san-serif":
+        case "San Serif":
           dynamicFont.value = "fontInter";
-          alert(dynamicFont.value);
           break;
-        case "serif":
+        case "Serif":
           dynamicFont.value = "fontLora";
-          alert(dynamicFont.value);
           break;
         case "Mono":
           dynamicFont.value = "fontInconsolata";
-          alert(dynamicFont.value);
           break;
       }
     };
