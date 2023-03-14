@@ -21,7 +21,14 @@
         </div> -->
       </div>
       <div class="cursor-pointer">
-        <img src="./assets/images/icon-play.svg" alt="" />
+        <div v-for="(sound, index) in dictionaryWord.phonetics" :key="index">
+          <img
+            v-if="sound.audio"
+            src="./assets/images/icon-play.svg"
+            @click="playSound(sound.audio)"
+            alt=""
+          />
+        </div>
       </div>
     </div>
     <div class="mt-10" v-if="dictionaryWord">
@@ -58,7 +65,18 @@ export default {
           break;
       }
     };
-    return { handleWord, dictionaryWord, phonetic, setFont, dynamicFont };
+    const playSound = (wordSound) => {
+      const audio = new Audio(wordSound);
+      audio.play();
+    };
+    return {
+      handleWord,
+      dictionaryWord,
+      phonetic,
+      setFont,
+      dynamicFont,
+      playSound,
+    };
   },
 };
 </script>
