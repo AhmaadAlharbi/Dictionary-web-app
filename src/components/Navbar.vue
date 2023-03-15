@@ -41,7 +41,7 @@
         </div>
       </div>
       <!-- toggle switch -->
-      <div class="space-x-10 flex items-center">
+      <div class="space-x-3 md:space-x-10 flex items-center">
         <i class="fa fa-sun-o" style="font-size: 24px"></i>
         <label class="switch">
           <input
