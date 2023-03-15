@@ -19,7 +19,7 @@
       <div v-else>
         <div class="mt-14 flex justify-between items-center">
           <div class="space-y-5" v-if="dictionaryWord">
-            <h1 class="text-7xl font-bold dark:text-white">
+            <h1 class="text-5xl font-bold dark:text-white">
               {{ dictionaryWord.word }}
             </h1>
             <p class="text-[#A445ED] text-xl">{{ dictionaryWord.phonetic }}</p>
