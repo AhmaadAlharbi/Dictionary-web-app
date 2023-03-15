@@ -16,16 +16,29 @@ import { onMounted, ref } from "vue";
 export default {
   setup(props, context) {
     const word = ref("keyboard");
-
+    const error = ref(null);
     const searchinDictionary = async () => {
       try {
+        error.value = null;
         const response = await fetch(
           `https://api.dictionaryapi.dev/api/v2/entries/en/${word.value}`
         );
+
+        if (!response.ok) {
+          throw Error("No Definitions Found");
+        }
+
         const data = await response.json();
+
+        if (!data || data.length === 0) {
+          throw Error("No Definitions Found");
+        }
+
         context.emit("word", data);
-      } catch (error) {
+      } catch (err) {
         console.log(error);
+        error.value = err.message;
+        context.emit("error", err.message);
       }
     };
     onMounted(() => {

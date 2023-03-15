@@ -4,13 +4,24 @@
     :class="`font-${dynamicFont}`"
   >
     <Navbar @font="setFont" />
-    <Search @word="handleWord" />
+    <Search @word="handleWord" @error="handleError" />
     <!-- Word -->
-    <div class="mt-14 flex justify-between items-center" v-if="dictionaryWord">
-      <div class="space-y-5">
-        <h1 class="text-5xl font-bold">{{ dictionaryWord.word }}</h1>
-        <p class="text-purple-800 text-xl">{{ dictionaryWord.phonetic }}</p>
-        <!-- <div v-if="dictionaryWord.phonetics" class="text-purple-800">
+    <div>
+      <div class="mt-14 flex flex-col justify-center items-center" v-if="error">
+        <img src="./assets/images/emoji.png" alt="" />
+        <h1 class="font-bold mt-4">{{ error }}</h1>
+        <p class="mt-4 text-gray-500 text-center">
+          Sorry pal, we couldn't find definitions for the word you were looking
+          for. You can try the search again at later time or head to the web
+          instead.
+        </p>
+      </div>
+      <div v-else>
+        <div class="mt-14 flex justify-between items-center">
+          <div class="space-y-5" v-if="dictionaryWord">
+            <h1 class="text-5xl font-bold">{{ dictionaryWord.word }}</h1>
+            <p class="text-purple-800 text-xl">{{ dictionaryWord.phonetic }}</p>
+            <!-- <div v-if="dictionaryWord.phonetics" class="text-purple-800">
           <p
             v-for="(phonetic, index) in dictionaryWord.phonetics"
             :key="index"
@@ -19,18 +30,20 @@
             <span> {{ phonetic.text }}</span>
           </p>
         </div> -->
+          </div>
+          <div class="cursor-pointer">
+            <img
+              v-if="audioSrc"
+              src="./assets/images/icon-play.svg"
+              @click="playSound(audioSrc)"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="mt-10" v-if="dictionaryWord">
+          <Details :dictionaryWord="dictionaryWord" />
+        </div>
       </div>
-      <div class="cursor-pointer">
-        <img
-          v-if="audioSrc"
-          src="./assets/images/icon-play.svg"
-          @click="playSound(audioSrc)"
-          alt=""
-        />
-      </div>
-    </div>
-    <div class="mt-10" v-if="dictionaryWord">
-      <Details :dictionaryWord="dictionaryWord" />
     </div>
   </div>
 </template>
@@ -46,8 +59,16 @@ export default {
     const dictionaryWord = ref(null);
     const dynamicFont = ref("fontInter");
     const phonetic = ref("");
+    const error = ref(null);
+    const handleError = (err) => {
+      error.value = err;
+    };
     const handleWord = async (data) => {
+      error.value = null;
       console.log(data[0]);
+      if (!data) {
+        console.log(data);
+      }
       dictionaryWord.value = data[0];
     };
     const setFont = (font) => {
@@ -83,6 +104,8 @@ export default {
       audio.play();
     };
     return {
+      error,
+      handleError,
       audioSrc,
       handleWord,
       dictionaryWord,
