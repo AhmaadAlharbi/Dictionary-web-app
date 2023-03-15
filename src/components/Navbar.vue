@@ -4,7 +4,9 @@
     <div>
       <img src="../assets/images/logo.svg" alt="" />
     </div>
-    <div class="relative flex items-center justify-center space-x-16">
+    <div
+      class="relative flex items-center justify-center space-x-16 dark:text-white"
+    >
       <div>
         <p @click="showFonts">
           {{ selectedFont }}
@@ -41,13 +43,23 @@
       <!-- toggle switch -->
       <div>
         <label class="switch">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            id="switch-icon"
+            @click="toggleDark('switch-icon')"
+          />
           <span class="slider round"></span>
         </label>
       </div>
       <!-- moon icon -->
-      <div>
-        <img src="../assets/images/icon-moon.svg" alt="" />
+      <div class="cursor-pointer" id="moon">
+        <i
+          v-if="theme === 'light'"
+          class="fa fa-sun-o"
+          style="font-size: 24px"
+        ></i>
+
+        <img v-else src="../assets/images/icon-moon.svg" alt="" />
       </div>
     </div>
   </nav>
@@ -58,6 +70,8 @@ import { ref } from "vue";
 export default {
   setup(props, context) {
     const selectedFont = ref("Sans Serif");
+    const theme = ref("light");
+
     const fonts = ref(false);
     const showFonts = () => {
       fonts.value = !fonts.value;
@@ -66,7 +80,26 @@ export default {
       selectedFont.value = font;
       context.emit("font", font);
     };
-    return { fonts, showFonts, selectFonts, selectedFont };
+    const toggleDark = (id) => {
+      document.getElementById(id).addEventListener("change", function () {
+        if (this.checked) {
+          document.documentElement.classList.add("dark");
+          theme.value = "dark";
+        } else {
+          document.documentElement.classList.remove("dark");
+          theme.value = "light";
+        }
+      });
+    };
+
+    return {
+      toggleDark,
+      fonts,
+      showFonts,
+      selectFonts,
+      selectedFont,
+      theme,
+    };
   },
 };
 </script>
@@ -93,7 +126,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #a8288a;
+  background-color: #bbbbbb;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -109,7 +142,7 @@ export default {
   transition: 0.4s;
 }
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #a8288a;
 }
 
 input:focus + .slider {

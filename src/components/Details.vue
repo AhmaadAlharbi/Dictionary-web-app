@@ -4,19 +4,21 @@
     v-for="(meaning, index) in dictionaryWord.meanings"
     :key="index"
   >
-    <h3 class="text-2xl font-bold">
+    <h3 class="text-2xl font-bold dark:text-white">
       {{ meaning.partOfSpeech }}
       <hr class="mt-5" />
     </h3>
     <span class="text-gray-500 mt-3 inline-block">Meaning</span>
     <ul class="space-y-4 mt-5">
       <li
-        class="none marker:text-green"
+        class="none marker:text-green dark:text-white"
         v-for="(definition, index) in meaning.definitions"
         :key="index"
       >
         {{ definition.definition }}
-        <span class="text-gray-500 block"> {{ definition.example }}</span>
+        <span class="text-gray-500 block dark:text-white">
+          {{ definition.example }}</span
+        >
       </li>
     </ul>
     <ul v-if="meaning.synonyms">

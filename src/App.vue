@@ -9,7 +9,7 @@
     <div>
       <div class="mt-14 flex flex-col justify-center items-center" v-if="error">
         <img src="./assets/images/emoji.png" alt="" />
-        <h1 class="font-bold mt-4">{{ error }}</h1>
+        <h1 class="font-bold mt-4 dark:text-white">{{ error }}</h1>
         <p class="mt-4 text-gray-500 text-center">
           Sorry pal, we couldn't find definitions for the word you were looking
           for. You can try the search again at later time or head to the web
@@ -19,8 +19,10 @@
       <div v-else>
         <div class="mt-14 flex justify-between items-center">
           <div class="space-y-5" v-if="dictionaryWord">
-            <h1 class="text-5xl font-bold">{{ dictionaryWord.word }}</h1>
-            <p class="text-purple-800 text-xl">{{ dictionaryWord.phonetic }}</p>
+            <h1 class="text-5xl font-bold dark:text-white">
+              {{ dictionaryWord.word }}
+            </h1>
+            <p class="text-[#A445ED] text-xl">{{ dictionaryWord.phonetic }}</p>
             <!-- <div v-if="dictionaryWord.phonetics" class="text-purple-800">
           <p
             v-for="(phonetic, index) in dictionaryWord.phonetics"
