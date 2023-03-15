@@ -11,7 +11,7 @@
     <span class="text-gray-500 mt-3 inline-block">Meaning</span>
     <ul class="space-y-4 mt-5">
       <li
-        class="none marker:text-green dark:text-white"
+        class="none marker:text-green dark:text-white text-xl"
         v-for="(definition, index) in meaning.definitions"
         :key="index"
       >

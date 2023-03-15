@@ -41,7 +41,8 @@
         </div>
       </div>
       <!-- toggle switch -->
-      <div>
+      <div class="space-x-10 flex items-center">
+        <i class="fa fa-sun-o" style="font-size: 24px"></i>
         <label class="switch">
           <input
             type="checkbox"
@@ -53,13 +54,7 @@
       </div>
       <!-- moon icon -->
       <div class="cursor-pointer" id="moon">
-        <i
-          v-if="theme === 'light'"
-          class="fa fa-sun-o"
-          style="font-size: 24px"
-        ></i>
-
-        <img v-else src="../assets/images/icon-moon.svg" alt="" />
+        <img src="../assets/images/icon-moon.svg" alt="" />
       </div>
     </div>
   </nav>
