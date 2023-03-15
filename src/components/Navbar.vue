@@ -16,7 +16,7 @@
           ></i>
         </p>
         <div
-          class="bg-white flex flex-col shadow-xl absolute top-0 right-10 m-10 w-full space-y-4 py-4"
+          class="bg-white flex flex-col shadow-xl absolute top-0 right-10 m-10 w-full space-y-4 py-4 dark:bg-purple-600"
           v-if="fonts"
           @click="showFonts"
         >
