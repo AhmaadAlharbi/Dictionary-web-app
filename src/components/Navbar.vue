@@ -5,7 +5,7 @@
       <img src="../assets/images/logo.svg" alt="" />
     </div>
     <div
-      class="relative flex items-center justify-center space-x-16 dark:text-white"
+      class="relative flex items-center justify-center space-x-8 md:space-x-16 dark:text-white"
     >
       <div>
         <p @click="showFonts">

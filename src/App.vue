@@ -1,7 +1,7 @@
 <template>
   <div
-    class="container mx-auto flex flex-col max-w-3xl"
-    :class="`font-${dynamicFont}`"
+    class="container mx-auto flex flex-col max-w-xs md:max-w-xl xl:max-w-3xl"
+    :style="{ fontFamily: dynamicFont }"
   >
     <Navbar @font="setFont" />
     <Search @word="handleWord" @error="handleError" />
@@ -76,13 +76,13 @@ export default {
     const setFont = (font) => {
       switch (font) {
         case "San Serif":
-          dynamicFont.value = "fontInter";
+          dynamicFont.value = "Inter";
           break;
         case "Serif":
-          dynamicFont.value = "fontLora";
+          dynamicFont.value = "Lora";
           break;
         case "Mono":
-          dynamicFont.value = "fontInconsolata";
+          dynamicFont.value = "Inconsolata";
           break;
       }
     };
