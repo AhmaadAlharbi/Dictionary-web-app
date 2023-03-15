@@ -15,7 +15,7 @@
 import { onMounted, ref } from "vue";
 export default {
   setup(props, context) {
-    const word = ref("keyboard");
+    const word = ref("");
     const error = ref(null);
     const searchinDictionary = async () => {
       try {
@@ -35,15 +35,13 @@ export default {
         }
 
         context.emit("word", data);
+        word.value = "";
       } catch (err) {
         console.log(error);
         error.value = err.message;
         context.emit("error", err.message);
       }
     };
-    onMounted(() => {
-      searchinDictionary();
-    });
 
     return { word, searchinDictionary };
     //data[0].word
